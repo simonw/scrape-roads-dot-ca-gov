@@ -1,8 +1,10 @@
+import re
+import sys
 import urllib.request
 import urllib.parse
-import sys
 
-start = "<p><em>This highway information"
+
+start_re = re.compile("<p><em>This highway information.*?</p>")
 end = "<hr />"
 
 
@@ -15,11 +17,9 @@ def scrape_roadnumber(roadnumber):
     req.add_header("Content-Type", "application/x-www-form-urlencoded")
 
     with urllib.request.urlopen(req) as response:
-        html = response.read()
+        html = response.read().decode("utf-8")
 
-    html = html.decode("utf-8")
-    html = html.split(start)[1].split(end)[0]
-    return (start + html).strip()
+    return start_re.split(html)[1].split(end)[0].strip()
 
 
 if __name__ == "__main__":
