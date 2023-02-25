@@ -21,6 +21,8 @@ jobs:
       run: |-
         python scrape_roads_dot_ca_gov.py 92 > 92.html
         python scrape_roads_dot_ca_gov.py 1 > 1.html
+        python scrape_roads_dot_ca_gov.py 35 > 35.html
+        python scrape_roads_dot_ca_gov.py 84 > 84.html
     - name: Commit and push if it changed
       run: |-
         git config user.name "Automated"
